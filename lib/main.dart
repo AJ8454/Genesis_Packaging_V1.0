@@ -18,7 +18,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Color(0xFFFE214F),
-        accentColor: Color(0xFFFFDF01),
         fontFamily: 'DMSans',
       ),
       title: title,
