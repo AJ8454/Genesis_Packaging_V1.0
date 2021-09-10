@@ -1,11 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sizer/sizer.dart';
 import 'package:genesis_packaging_v1/screen/auth_screen/signUp_page.dart';
 import 'login_form.dart';
 
 class AuthPage extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +25,7 @@ class AuthPage extends StatelessWidget {
                   Text(
                     'Welcome,',
                     style: TextStyle(
-                      fontSize: 40.0,
+                      fontSize: 30.sp,
                       color: Color(0xFF0E131C),
                       fontWeight: FontWeight.bold,
                     ),
@@ -32,13 +33,13 @@ class AuthPage extends StatelessWidget {
                   Text(
                     'Sign in to Continue!',
                     style: TextStyle(
-                      fontSize: 25.0,
+                      fontSize: 20.sp,
                       color: Color(0xFFA7AEB6),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const Spacer(),
-                  LoginForm(formKey: _formKey),
+                  LoginForm(),
                   const Spacer(),
                   Align(
                     alignment: Alignment.center,

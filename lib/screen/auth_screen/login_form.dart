@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:genesis_packaging_v1/widget/google_signIn_button.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({
     Key? key,
-    required GlobalKey<FormState> formKey,
-  })  : _formKey = formKey,
-        super(key: key);
-
-  final GlobalKey<FormState> _formKey;
+  }) : super(key: key);
 
   @override
   State<LoginForm> createState() => _LoginFormState();
 }
 
 class _LoginFormState extends State<LoginForm> {
+  final _formKey = GlobalKey<FormState>();
   bool? _passwordVisible = false;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Form(
-        key: widget._formKey,
+        key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -114,7 +112,7 @@ class _LoginFormState extends State<LoginForm> {
             const SizedBox(height: 20.0),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(300, 50),
+                minimumSize: Size(80.w, 50),
                 primary: Color(0xFFF4578E),
                 onPrimary: Colors.white,
                 shape: RoundedRectangleBorder(

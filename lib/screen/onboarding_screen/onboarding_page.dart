@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sizer/sizer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
@@ -16,7 +17,11 @@ class OnBoardingPage extends StatelessWidget {
                 title: 'Welcome',
                 body: 'Genesis Packaging',
                 image: Center(
-                  child: Image.asset('assets/icons/appIcon.png'),
+                  child: Image.asset(
+                    'assets/icons/appIcon.png',
+                    width: 50.h,
+                    height: 50.h,
+                  ),
                 ),
                 decoration: getPageDecoration(),
               ),
@@ -29,36 +34,42 @@ class OnBoardingPage extends StatelessWidget {
               PageViewModel(
                 title: 'Welcome',
                 body: 'Genesis Packaging',
-                image: Image.asset('assets/icons/appIcon.png'),
+                image: Image.asset(
+                  'assets/icons/appIcon.png',
+                  width: 50.h,
+                  height: 50.h,
+                ),
                 footer: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Colors.teal,
                     onPrimary: Colors.white,
                     shape: const StadiumBorder(),
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 40.0, vertical: 14.0),
+                    minimumSize: Size(50.w, 40),
                   ),
                   onPressed: () => goToAuthScreen(context),
-                  child: const Text(
+                  child: Text(
                     "Let's Go !",
-                    style: const TextStyle(fontSize: 16.0),
+                    style: TextStyle(fontSize: 14.sp),
                   ),
                 ),
                 decoration: getPageDecoration(),
               ),
             ],
-            skip: const Text("Skip",
+            skip: Text("Skip",
                 style: TextStyle(
                     color: Colors.blueGrey,
-                    fontSize: 14.0,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.w600)),
-            next: const Icon(FontAwesomeIcons.angleRight,
-                color: Colors.red, size: 30.0),
-            done: const Text(
+            next: Icon(
+              FontAwesomeIcons.angleRight,
+              color: Colors.red,
+              size: 10.w,
+            ),
+            done: Text(
               "Done",
               style: TextStyle(
                   color: Colors.red,
-                  fontSize: 14.0,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w600),
             ),
             showSkipButton: true,

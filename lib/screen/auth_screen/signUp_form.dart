@@ -1,54 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:genesis_packaging_v1/widget/google_signIn_button.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({
     Key? key,
-    required GlobalKey<FormState> formKey,
-  })  : _formKey = formKey,
-        super(key: key);
-
-  final GlobalKey<FormState> _formKey;
+  }) : super(key: key);
 
   @override
   State<SignUpForm> createState() => _SignUpFormState();
 }
 
 class _SignUpFormState extends State<SignUpForm> {
+  final _formKey = GlobalKey<FormState>();
   bool? _passwordVisible = false;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Form(
-        key: widget._formKey,
+        key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            TextField(
-              //controller: ,
-              decoration: InputDecoration(
-                labelText: "Full Name",
-                hintText: "Enter Full Name",
-                labelStyle: TextStyle(
-                  color: Color(0xFFA7AEB6),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(
+            Container(
+              child: TextField(
+                //controller: ,
+                decoration: InputDecoration(
+                  labelText: "Full Name",
+                  hintText: "Enter Full Name",
+                  labelStyle: TextStyle(
                     color: Color(0xFFA7AEB6),
-                    width: 2.0,
                   ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10.0),
+                  border: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      color: Color(0xFFA7AEB6),
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10.0),
+                    ),
                   ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: Color(0xFFF4578E),
-                    width: 2.0,
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10.0),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      color: Color(0xFFF4578E),
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10.0),
+                    ),
                   ),
                 ),
               ),
@@ -130,7 +130,7 @@ class _SignUpFormState extends State<SignUpForm> {
             const SizedBox(height: 20.0),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(300, 50),
+                minimumSize: Size(80.w, 50),
                 primary: Color(0xFFF4578E),
                 onPrimary: Colors.white,
                 shape: RoundedRectangleBorder(

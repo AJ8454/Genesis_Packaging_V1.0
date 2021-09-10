@@ -1,10 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:flutter/services.dart';
 import 'signUp_form.dart';
 
 class SignUpPage extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +23,7 @@ class SignUpPage extends StatelessWidget {
                   Text(
                     'Create Account,',
                     style: TextStyle(
-                      fontSize: 40.0,
+                      fontSize: 30.sp,
                       color: Color(0xFF0E131C),
                       fontWeight: FontWeight.bold,
                     ),
@@ -31,13 +31,13 @@ class SignUpPage extends StatelessWidget {
                   Text(
                     'Sign up to get started!',
                     style: TextStyle(
-                      fontSize: 25.0,
+                      fontSize: 20.sp,
                       color: Color(0xFFA7AEB6),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const Spacer(),
-                  SignUpForm(formKey: _formKey),
+                  SignUpForm(),
                   const Spacer(),
                   Align(
                     alignment: Alignment.center,
