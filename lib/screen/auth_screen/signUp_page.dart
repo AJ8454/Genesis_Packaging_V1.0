@@ -1,5 +1,5 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import './/widget/authentication_widgets/signIn_signUp_Label.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/services.dart';
 import 'signUp_form.dart';
@@ -23,7 +23,7 @@ class SignUpPage extends StatelessWidget {
                   Text(
                     'Create Account,',
                     style: TextStyle(
-                      fontSize: 30.sp,
+                      fontSize: 25.sp,
                       color: Color(0xFF0E131C),
                       fontWeight: FontWeight.bold,
                     ),
@@ -31,7 +31,7 @@ class SignUpPage extends StatelessWidget {
                   Text(
                     'Sign up to get started!',
                     style: TextStyle(
-                      fontSize: 20.sp,
+                      fontSize: 18.sp,
                       color: Color(0xFFA7AEB6),
                       fontWeight: FontWeight.bold,
                     ),
@@ -39,29 +39,10 @@ class SignUpPage extends StatelessWidget {
                   const Spacer(),
                   SignUpForm(),
                   const Spacer(),
-                  Align(
-                    alignment: Alignment.center,
-                    child: RichText(
-                      text: TextSpan(
-                        text: 'I\'m already a member, ',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          color: Color(0xFF4E4E5A),
-                        ),
-                        children: [
-                          TextSpan(
-                            text: 'Sign In',
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              color: Color(0xFFD64F7C),
-                              fontWeight: FontWeight.bold,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () => Navigator.of(context).pop(),
-                          ),
-                        ],
-                      ),
-                    ),
+                  SignInAndSignUpLabel(
+                    text1: 'I\'m already a member, ',
+                    text2: 'Sign In',
+                    onClicked: () => Navigator.of(context).pop(),
                   ),
                   const Spacer(),
                 ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genesis_packaging_v1/utils/user_simple_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:genesis_packaging_v1/provider/google_sign_in_provider.dart';
@@ -22,7 +23,7 @@ class GoogleSignInButton extends StatelessWidget {
       onPressed: () {
         final provider =
             Provider.of<GoogleSignInProvider>(context, listen: false);
-        provider.login();
+        provider.login().then((_) => UserSimplePreferences.setUser(false));
       },
       label: Text(
         'Google',

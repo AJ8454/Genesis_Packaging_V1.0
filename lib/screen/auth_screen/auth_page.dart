@@ -1,8 +1,8 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import './/widget/authentication_widgets/signIn_signUp_Label.dart';
 import 'package:sizer/sizer.dart';
-import 'package:genesis_packaging_v1/screen/auth_screen/signUp_page.dart';
+import './/screen/auth_screen/signUp_page.dart';
 import 'login_form.dart';
 
 class AuthPage extends StatelessWidget {
@@ -23,7 +23,7 @@ class AuthPage extends StatelessWidget {
                   Text(
                     'Welcome,',
                     style: TextStyle(
-                      fontSize: 30.sp,
+                      fontSize: 25.sp,
                       color: Color(0xFF0E131C),
                       fontWeight: FontWeight.bold,
                     ),
@@ -31,7 +31,7 @@ class AuthPage extends StatelessWidget {
                   Text(
                     'Sign in to Continue!',
                     style: TextStyle(
-                      fontSize: 20.sp,
+                      fontSize: 18.sp,
                       color: Color(0xFFA7AEB6),
                       fontWeight: FontWeight.bold,
                     ),
@@ -39,30 +39,12 @@ class AuthPage extends StatelessWidget {
                   const Spacer(),
                   LoginForm(),
                   const Spacer(),
-                  Align(
-                    alignment: Alignment.center,
-                    child: RichText(
-                      text: TextSpan(
-                        text: 'I\'m a new user, ',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          color: Color(0xFF4E4E5A),
-                        ),
-                        children: [
-                          TextSpan(
-                            text: 'Sign Up',
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              color: Color(0xFFD64F7C),
-                              fontWeight: FontWeight.bold,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () => Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                        builder: (context) => SignUpPage()),
-                                  ),
-                          ),
-                        ],
+                  SignInAndSignUpLabel(
+                    text1: 'I\'m a new user, ',
+                    text2: 'Sign Up',
+                    onClicked: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => SignUpPage(),
                       ),
                     ),
                   ),

@@ -33,8 +33,8 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-              primaryColor: primaryColor,
-              scaffoldBackgroundColor: canvasColor,
+              primarySwatch: Colors.pink,
+              scaffoldBackgroundColor: bgColor,
               fontFamily: 'DMSans',
             ),
             title: title,
