@@ -6,11 +6,9 @@ import 'package:genesis_packaging_v1/screen/auth_screen/signUp_page.dart';
 import 'login_form.dart';
 
 class AuthPage extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFFFFF),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.dark,
         child: SingleChildScrollView(

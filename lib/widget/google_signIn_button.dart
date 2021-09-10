@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:genesis_packaging_v1/utils/user_simple_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:genesis_packaging_v1/provider/google_sign_in_provider.dart';
 import 'package:provider/provider.dart';
 
 class GoogleSignInButton extends StatelessWidget {
-  const GoogleSignInButton({
-    Key? key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
@@ -24,11 +19,10 @@ class GoogleSignInButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
       ),
-      onPressed: () async {
+      onPressed: () {
         final provider =
             Provider.of<GoogleSignInProvider>(context, listen: false);
         provider.login();
-        await UserSimplePreferences.setUser(false);
       },
       label: Text(
         'Google',

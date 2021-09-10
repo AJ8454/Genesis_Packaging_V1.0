@@ -6,6 +6,7 @@ import 'package:sizer/sizer.dart';
 import 'initial_page.dart';
 import 'provider/google_sign_in_provider.dart';
 import 'screen/auth_screen/auth_page.dart';
+import 'utils/constants.dart';
 import 'utils/user_simple_preferences.dart';
 
 void main() async {
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-              primaryColor: Color(0xFFF4578E),
+              primaryColor: primaryColor,
+              scaffoldBackgroundColor: canvasColor,
               fontFamily: 'DMSans',
             ),
             title: title,

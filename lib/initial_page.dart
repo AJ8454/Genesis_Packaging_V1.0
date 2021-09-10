@@ -24,21 +24,23 @@ class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          final provider = Provider.of<GoogleSignInProvider>(context);
-          if (provider.isSigningIn) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasData) {
-            return HomePage();
-          } else {
-            return newUser! ? OnBoardingPage() : AuthPage();
-          }
-        },
+      body: ChangeNotifierProvider(
+        create: (context) => GoogleSignInProvider(),
+        child: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            final provider = Provider.of<GoogleSignInProvider>(context);
+            if (provider.isSigningIn) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (snapshot.hasData) {
+              return HomePage();
+            } else {
+              return newUser! ? OnBoardingPage() : AuthPage();
+            }
+          },
+        ),
       ),
     );
   }
