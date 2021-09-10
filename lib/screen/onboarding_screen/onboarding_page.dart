@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
@@ -6,62 +7,67 @@ class OnBoardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: IntroductionScreen(
-          pages: [
-            PageViewModel(
-              title: 'Welcome',
-              body: 'Genesis Packaging',
-              image: Center(
-                child: Image.asset('assets/icons/appIcon.png'),
-              ),
-              decoration: getPageDecoration(),
-            ),
-            PageViewModel(
-              title: 'Welcome',
-              body: 'Genesis Packaging',
-              image: Image.asset('assets/icons/appIcon.png'),
-              decoration: getPageDecoration(),
-            ),
-            PageViewModel(
-              title: 'Welcome',
-              body: 'Genesis Packaging',
-              image: Image.asset('assets/icons/appIcon.png'),
-              footer: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.teal,
-                  onPrimary: Colors.white,
-                  shape: const StadiumBorder(),
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 40.0, vertical: 14.0),
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.dark,
+        child: SafeArea(
+          child: IntroductionScreen(
+            pages: [
+              PageViewModel(
+                title: 'Welcome',
+                body: 'Genesis Packaging',
+                image: Center(
+                  child: Image.asset('assets/icons/appIcon.png'),
                 ),
-                onPressed: () => goToAuthScreen(context),
-                child: const Text(
-                  "Let's Go !",
-                  style: const TextStyle(fontSize: 16.0),
-                ),
+                decoration: getPageDecoration(),
               ),
-              decoration: getPageDecoration(),
-            ),
-          ],
-          skip: const Text("Skip",
+              PageViewModel(
+                title: 'Welcome',
+                body: 'Genesis Packaging',
+                image: Image.asset('assets/icons/appIcon.png'),
+                decoration: getPageDecoration(),
+              ),
+              PageViewModel(
+                title: 'Welcome',
+                body: 'Genesis Packaging',
+                image: Image.asset('assets/icons/appIcon.png'),
+                footer: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.teal,
+                    onPrimary: Colors.white,
+                    shape: const StadiumBorder(),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 40.0, vertical: 14.0),
+                  ),
+                  onPressed: () => goToAuthScreen(context),
+                  child: const Text(
+                    "Let's Go !",
+                    style: const TextStyle(fontSize: 16.0),
+                  ),
+                ),
+                decoration: getPageDecoration(),
+              ),
+            ],
+            skip: const Text("Skip",
+                style: TextStyle(
+                    color: Colors.blueGrey,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w600)),
+            next: const Icon(FontAwesomeIcons.angleRight,
+                color: Colors.red, size: 30.0),
+            done: const Text(
+              "Done",
               style: TextStyle(
-                  color: Colors.blueGrey,
+                  color: Colors.red,
                   fontSize: 14.0,
-                  fontWeight: FontWeight.w600)),
-          next: const Icon(FontAwesomeIcons.angleRight,
-              color: Colors.red, size: 30.0),
-          done: const Text(
-            "Done",
-            style: TextStyle(
-                color: Colors.red, fontSize: 14.0, fontWeight: FontWeight.w600),
+                  fontWeight: FontWeight.w600),
+            ),
+            showSkipButton: true,
+            showNextButton: true,
+            dotsDecorator: getDotDecorator(),
+            skipFlex: 0,
+            nextFlex: 0,
+            onDone: () => goToAuthScreen(context),
           ),
-          showSkipButton: true,
-          showNextButton: true,
-          dotsDecorator: getDotDecorator(),
-          skipFlex: 0,
-          nextFlex: 0,
-          onDone: () => goToAuthScreen(context),
         ),
       ),
     );

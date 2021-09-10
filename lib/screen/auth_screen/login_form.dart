@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:genesis_packaging_v1/widget/google_signIn_button.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   const LoginForm({
     Key? key,
     required GlobalKey<FormState> formKey,
@@ -11,10 +12,16 @@ class LoginForm extends StatelessWidget {
   final GlobalKey<FormState> _formKey;
 
   @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  bool? _passwordVisible = false;
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Form(
-        key: _formKey,
+        key: widget._formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -49,6 +56,7 @@ class LoginForm extends StatelessWidget {
             const SizedBox(height: 20.0),
             TextField(
               //controller: ,
+              obscureText: !_passwordVisible!,
               decoration: InputDecoration(
                 labelText: "Password",
                 hintText: "Enter Password",
@@ -71,6 +79,21 @@ class LoginForm extends StatelessWidget {
                   ),
                   borderRadius: BorderRadius.all(
                     Radius.circular(10.0),
+                  ),
+                ),
+                suffixIcon: IconButton(
+                  padding: EdgeInsets.only(right: 15.0),
+                  icon: Icon(
+                    !_passwordVisible!
+                        ? FontAwesomeIcons.eyeSlash
+                        : FontAwesomeIcons.eye,
+                  ),
+                  color: Theme.of(context).primaryColor,
+                  iconSize: 18.0,
+                  onPressed: () => setState(
+                    () {
+                      _passwordVisible = !_passwordVisible!;
+                    },
                   ),
                 ),
               ),
@@ -108,27 +131,7 @@ class LoginForm extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10.0),
-            ElevatedButton.icon(
-              icon: Icon(
-                FontAwesomeIcons.google,
-              ),
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(300, 50),
-                primary: Color(0xFFEAEEF4),
-                onPrimary: Color(0xFFFE214F),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              onPressed: () {},
-              label: Text(
-                'Google',
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            GoogleSignInButton(),
           ],
         ),
       ),
