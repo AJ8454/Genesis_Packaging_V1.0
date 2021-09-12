@@ -1,26 +1,61 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:genesis_packaging_v1/widget/homePage_widgets/homePage_app_bar.dart';
-import 'package:genesis_packaging_v1/widget/homePage_widgets/app_drawer.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:genesis_packaging_v1/widget/shadow_appbar_button.dart';
 import 'package:sizer/sizer.dart';
+import 'package:genesis_packaging_v1/widget/homePage_widgets/app_drawer.dart';
 import 'package:genesis_packaging_v1/utils/constants.dart';
 
 class HomePage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final user = FirebaseAuth.instance.currentUser;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: canvasColor,
+      backgroundColor: kCanvasColor,
       drawer: AppDrawer(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              HomePageAppBar(scaffoldKey: _scaffoldKey),
-              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ShadowAppBarButton(
+                    icon: FontAwesomeIcons.bars,
+                    onClicked: () => _scaffoldKey.currentState!.openDrawer(),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey[500]!,
+                          blurRadius: 5,
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        width: 40.0,
+                        height: 40.0,
+                        child: Image(
+                          image: NetworkImage(
+                            (user!.photoURL!),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              
               Text(
                 'All Products',
                 style: TextStyle(
@@ -28,9 +63,12 @@ class HomePage extends StatelessWidget {
                   fontSize: 20.sp,
                 ),
               ),
-              const SizedBox(height: 10),
               Container(
-                height: 50,
+                margin: EdgeInsets.symmetric(vertical: 10.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                ),
+                height: 40,
                 child: CupertinoSearchTextField(),
               ),
             ],
