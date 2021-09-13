@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:genesis_packaging_v1/widget/authentication_widgets/auth_button.dart';
 import 'package:genesis_packaging_v1/widget/authentication_widgets/auth_passwordfield.dart';
 import 'package:genesis_packaging_v1/widget/authentication_widgets/auth_textfields.dart';
-import 'package:genesis_packaging_v1/utils/constants.dart';
 import 'package:genesis_packaging_v1/widget/authentication_widgets/google_signIn_button.dart';
 
 class SignUpForm extends StatefulWidget {
@@ -17,7 +15,6 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
-  bool? _passwordVisible = false;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

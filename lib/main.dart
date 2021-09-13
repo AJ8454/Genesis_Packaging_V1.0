@@ -8,11 +8,9 @@ import 'initial_page.dart';
 import 'provider/google_sign_in_provider.dart';
 import 'screen/auth_screen/auth_page.dart';
 import 'screen/stock_items_screen/stock_edit_screen.dart';
-import 'screen/stock_items_screen/stock_items.dart';
+import 'screen/stock_items_screen/stock_items_screen.dart';
 import 'utils/constants.dart';
 import 'utils/user_simple_preferences.dart';
-
-// TODO: have to work on EditStock scren
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +20,9 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.immersiveSticky,
+  );
   runApp(MyApp());
 }
 

@@ -25,7 +25,7 @@ class Product with ChangeNotifier {
     required this.rate,
     required this.gstNo,
     this.imageUrl =
-        'https://www.distributioninternational.com/ASSETS/IMAGES/ITEMS/DETAIL_PAGE/MISCSTEELDRUM-v1.jpg',
+        'https://www.greif.com/uploads/media/category_images/0001/01/thumb_850_category_images_big.png',
     // required this.imageUrl,
   });
 }

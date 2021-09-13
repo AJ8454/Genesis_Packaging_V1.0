@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genesis_packaging_v1/utils/constants.dart';
 import './/widget/authentication_widgets/signIn_signUp_Label.dart';
-import 'package:sizer/sizer.dart';
 import 'package:flutter/services.dart';
 import 'signUp_form.dart';
 
@@ -23,11 +22,11 @@ class SignUpPage extends StatelessWidget {
                   const Spacer(),
                   Text(
                     'Create Account,',
-                    style: labelTextStyle,
+                    style: kLabelTextStyle,
                   ),
                   Text(
                     'Sign up to get started!',
-                    style: labelTextStyle2,
+                    style: kLabelTextStyle2,
                   ),
                   const Spacer(),
                   SignUpForm(),

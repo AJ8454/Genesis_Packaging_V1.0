@@ -7,8 +7,14 @@ import 'package:sizer/sizer.dart';
 import 'package:genesis_packaging_v1/widget/homePage_widgets/app_drawer.dart';
 import 'package:genesis_packaging_v1/utils/constants.dart';
 
-class HomePage extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+
   final user = FirebaseAuth.instance.currentUser;
 
   @override
@@ -55,7 +61,6 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              
               Text(
                 'All Products',
                 style: TextStyle(

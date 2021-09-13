@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 class StockProvider with ChangeNotifier {
-  
 // setter
   List<Product> _items = [];
 
@@ -17,7 +16,7 @@ class StockProvider with ChangeNotifier {
     return _items.firstWhere((prod) => prod.id! == id!);
   }
 
-  Future<void> fetchAndSetProducts([bool filterByUser = false]) async {
+  Future<void> fetchAndSetProducts() async {
     var url =
         'https://genesis-packaging-v-1-default-rtdb.firebaseio.com/products.json';
     try {

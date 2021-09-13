@@ -9,14 +9,19 @@ const kBgColor = Color(0xFFFFFFFF);
 const kGreyColor = Color(0xFFA7AEB6);
 
 // ---- final ---------------
-final labelTextStyle = TextStyle(
+final kLabelTextStyle = TextStyle(
   fontSize: 25.sp,
   color: kDarkColor,
   fontWeight: FontWeight.bold,
 );
 
-final labelTextStyle2 = TextStyle(
+final kLabelTextStyle2 = TextStyle(
   fontSize: 18.sp,
   color: kGreyColor,
   fontWeight: FontWeight.bold,
+);
+
+final kHeadStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 20.sp,
 );
