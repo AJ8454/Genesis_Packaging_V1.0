@@ -4,7 +4,12 @@ import './/widget/authentication_widgets/signIn_signUp_Label.dart';
 import 'package:flutter/services.dart';
 import 'signUp_form.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

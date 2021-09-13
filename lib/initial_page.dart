@@ -18,7 +18,6 @@ class _InitialPageState extends State<InitialPage> {
   @override
   void initState() {
     super.initState();
-    
     newUser = UserSimplePreferences.getUser() ?? true;
   }
 

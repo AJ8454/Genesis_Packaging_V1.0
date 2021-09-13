@@ -44,7 +44,7 @@ class StockItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Image(
-                  image: NetworkImage(imageUrl!),
+                  image: AssetImage(imageUrl!),
                 ),
               ),
             ),
@@ -55,16 +55,16 @@ class StockItem extends StatelessWidget {
                 Text(
                   title!,
                   style: TextStyle(
-                    fontSize: 12.sp,
+                    fontSize: 18.sp,
                     color: kDarkColor,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w900,
                   ),
                 ),
                 const SizedBox(height: 5),
                 Text(
                   type!,
                   style: TextStyle(
-                    fontSize: 9.sp,
+                    fontSize: 12.sp,
                     color: kGreyColor,
                     fontWeight: FontWeight.bold,
                   ),

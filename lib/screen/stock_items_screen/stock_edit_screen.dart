@@ -179,7 +179,7 @@ class _EditStockScreenState extends State<EditStockScreen> {
                         const Spacer(),
                         ShadowAppBarButton(
                           icon: FontAwesomeIcons.save,
-                          //onClicked: () =>
+                          onClicked: () => _submitForm(),
                         ),
                       ],
                     ),
@@ -458,7 +458,6 @@ class _EditStockScreenState extends State<EditStockScreen> {
                                           minimumSize: Size(80.w, 50),
                                           primary: Colors.amber,
                                           elevation: 8,
-                                          
                                         ),
                                         onPressed: () => _submitForm(),
                                         child: Text(

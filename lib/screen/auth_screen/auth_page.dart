@@ -5,7 +5,12 @@ import './/widget/authentication_widgets/signIn_signUp_Label.dart';
 import './/screen/auth_screen/signUp_page.dart';
 import 'login_form.dart';
 
-class AuthPage extends StatelessWidget {
+class AuthPage extends StatefulWidget {
+  @override
+  State<AuthPage> createState() => _AuthPageState();
+}
+
+class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

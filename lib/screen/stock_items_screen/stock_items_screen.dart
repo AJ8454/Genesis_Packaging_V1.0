@@ -8,8 +8,14 @@ import 'package:sizer/sizer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:genesis_packaging_v1/utils/constants.dart';
 
-class StockItems extends StatelessWidget {
+class StockItems extends StatefulWidget {
   const StockItems({Key? key}) : super(key: key);
+
+  @override
+  State<StockItems> createState() => _StockItemsState();
+}
+
+class _StockItemsState extends State<StockItems> {
   Future<void> _refreshProducts(BuildContext context) async {
     try {
       await Provider.of<StockProvider>(context, listen: false)
@@ -21,16 +27,30 @@ class StockItems extends StatelessWidget {
       //   //backgroundColor: HexColor('#E2E0DF'),
       //   textColor: Theme.of(context).errorColor,
       // );
-      Center(
-        child: Text('No Products add yet'),
-      );
+
     }
   }
 
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   Future.delayed(Duration(milliseconds: 1000), () {
+  //     setState(() {
+  //       totalCount();
+  //     });
+  //   });
+  // }
+
+  // int? totalCount() {
+  //   final provider = Provider.of<StockProvider>(context, listen: false);
+  //   return provider.items.length;
+  // }
+
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<StockProvider>(context, listen: false);
-    int? totalProducts = provider.items.length;
+    final productData = Provider.of<StockProvider>(context, listen: false);
+    int? totalCount = productData.items.length;
+
     return Scaffold(
       backgroundColor: kCanvasColor,
       body: SafeArea(
@@ -57,7 +77,7 @@ class StockItems extends StatelessWidget {
                 style: kHeadStyle,
               ),
               Text(
-                '${totalProducts.toString()} Items',
+                '${totalCount.toString()} Items',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 8.sp,
@@ -69,13 +89,13 @@ class StockItems extends StatelessWidget {
                   future: _refreshProducts(context),
                   builder: (ctx, snapshot) =>
                       snapshot.connectionState == ConnectionState.waiting
-                          ?  buildShimmerLoading()
-                          : Consumer<StockProvider>(
-                              builder: (ctx, productData, _) => Padding(
-                                padding: EdgeInsets.all(8),
-                                child: ListView.builder(
-                                  itemCount: productData.items.length,
-                                  itemBuilder: (_, i) => Column(
+                          ? buildShimmerLoading()
+                          : Padding(
+                              padding: EdgeInsets.all(8),
+                              child: ListView.builder(
+                                itemCount: productData.items.length,
+                                itemBuilder: (_, i) {
+                                  return Column(
                                     children: [
                                       StockItem(
                                         id: productData.items[i].id!,
@@ -84,8 +104,8 @@ class StockItems extends StatelessWidget {
                                         type: productData.items[i].type,
                                       ),
                                     ],
-                                  ),
-                                ),
+                                  );
+                                },
                               ),
                             ),
                 ),

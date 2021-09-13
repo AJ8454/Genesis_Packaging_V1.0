@@ -25,7 +25,7 @@ class Product with ChangeNotifier {
     required this.rate,
     required this.gstNo,
     this.imageUrl =
-        'https://www.greif.com/uploads/media/category_images/0001/01/thumb_850_category_images_big.png',
+        'assets/images/drum.png',
     // required this.imageUrl,
   });
 }
