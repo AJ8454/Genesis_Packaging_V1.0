@@ -31,25 +31,10 @@ class _StockItemsState extends State<StockItems> {
     }
   }
 
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   Future.delayed(Duration(milliseconds: 1000), () {
-  //     setState(() {
-  //       totalCount();
-  //     });
-  //   });
-  // }
-
-  // int? totalCount() {
-  //   final provider = Provider.of<StockProvider>(context, listen: false);
-  //   return provider.items.length;
-  // }
-
   @override
   Widget build(BuildContext context) {
     final productData = Provider.of<StockProvider>(context, listen: false);
-    int? totalCount = productData.items.length;
+    int? totalCount = productData.totalItems;
 
     return Scaffold(
       backgroundColor: kCanvasColor,

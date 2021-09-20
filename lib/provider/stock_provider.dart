@@ -4,12 +4,18 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 class StockProvider with ChangeNotifier {
+  int? totalItems;
 // setter
   List<Product> _items = [];
 
 // getter
   List<Product> get items {
     return [..._items];
+  }
+
+  void totalCount() {
+    totalItems = items.length;
+    notifyListeners();
   }
 
   Product findById(String? id) {
