@@ -35,7 +35,6 @@ class _StockItemsState extends State<StockItems> {
   Widget build(BuildContext context) {
     final productData = Provider.of<StockProvider>(context, listen: false);
     int? totalCount = productData.totalItems;
-
     return Scaffold(
       backgroundColor: kCanvasColor,
       body: SafeArea(

@@ -18,29 +18,38 @@ class ItemTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 15.0,
-          ),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Hero(
                 tag: Key(product.id!),
-                child: Container(
-                  margin: EdgeInsets.symmetric(
-                    vertical: 8.0,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    margin: EdgeInsets.symmetric(
+                      vertical: 8.0,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Image.asset(
+                      product.imageUrl,
+                      fit: BoxFit.fill,
+                      width: 18.h,
+                      height: 18.h,
+                    ),
                   ),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[100],
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Image.asset(
-                    product.imageUrl,
-                    fit: BoxFit.fill,
-                    width: 15.h,
-                    height: 15.h,
-                  ),
+                ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                product.title!,
+                style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               const SizedBox(height: 2),
@@ -48,15 +57,7 @@ class ItemTile extends StatelessWidget {
                 '${product.type!}',
                 style: TextStyle(
                   color: kGreyColor,
-                  fontSize: 10.sp,
-                ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                product.title!,
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w500,
+                  fontSize: 14.sp,
                 ),
               ),
               const SizedBox(height: 2),
@@ -65,7 +66,7 @@ class ItemTile extends StatelessWidget {
                 style: TextStyle(
                   color: Color(0xFFD4B078),
                   fontWeight: FontWeight.bold,
-                  fontSize: 10.sp,
+                  fontSize: 12.sp,
                 ),
               ),
             ],

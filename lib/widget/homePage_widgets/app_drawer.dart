@@ -37,14 +37,28 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           DrawerListTile(
+            name: 'Attendance',
+            icon: Icons.person_outline,
+            onClicked: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed('/stockItems');
+            },
+          ),
+          DrawerListTile(
             name: 'Employees',
             icon: Icons.person,
-            //navigate: '/EmployeeScreen',
+            onClicked: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed('/EmployeeScreen');
+            },
           ),
           DrawerListTile(
             name: 'Orders',
             icon: Icons.local_shipping_rounded,
-            //navigate: '/OrdersScreen',
+            onClicked: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed('/OrderScreen');
+            },
           ),
           DrawerListTile(
             name: 'Production',
