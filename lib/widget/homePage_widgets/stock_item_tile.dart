@@ -13,15 +13,14 @@ class StockItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final height = MediaQuery.of(context).size.height / 3.6;
-    // final width = MediaQuery.of(context).size.width / 1.3;
+    final size = MediaQuery.of(context).size;
     final productData = Provider.of<StockProvider>(context);
     return RefreshIndicator(
       onRefresh: () => fetchAllProducts(context),
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: (2 / 3),
+          childAspectRatio: 2 / 3.5,
           crossAxisSpacing: 5,
           mainAxisSpacing: 5,
         ),

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:genesis_packaging_v1/provider/stock_provider.dart';
 import 'package:genesis_packaging_v1/utils/constants.dart';
-import 'package:provider/provider.dart';
+
 
 class PlaceItem extends StatelessWidget {
   final String? id;

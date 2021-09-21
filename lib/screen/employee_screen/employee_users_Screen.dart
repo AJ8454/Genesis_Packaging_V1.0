@@ -3,7 +3,6 @@ import 'package:genesis_packaging_v1/provider/employee_provider.dart';
 import 'package:genesis_packaging_v1/screen/employee_screen/user_employee.dart';
 import 'package:genesis_packaging_v1/widget/appbar_design.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 
 class EmployeeUserScreen extends StatelessWidget {
   Future<void> _refreshEmployee(BuildContext context) async {
