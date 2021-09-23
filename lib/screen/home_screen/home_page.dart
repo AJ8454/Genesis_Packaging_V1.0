@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
       drawer: AppDrawer(),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.only(top: 12, left: 12, right: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -78,10 +78,7 @@ class _HomePageState extends State<HomePage> {
                 child: CupertinoSearchTextField(),
               ),
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: StockGrid(),
-                ),
+                child: StockGrid(),
               ),
             ],
           ),

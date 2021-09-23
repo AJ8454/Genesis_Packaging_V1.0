@@ -18,11 +18,12 @@ class StockItemTile extends StatelessWidget {
     return RefreshIndicator(
       onRefresh: () => fetchAllProducts(context),
       child: GridView.builder(
+        shrinkWrap: true,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 2.h / 3.h,
           crossAxisSpacing: 5,
           mainAxisSpacing: 5,
+          childAspectRatio: (30.h / 52.h),
         ),
         itemCount: productData.items.length,
         itemBuilder: (context, i) => ChangeNotifierProvider.value(

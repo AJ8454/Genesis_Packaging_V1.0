@@ -3,7 +3,7 @@ class PlaceOrderTodoField {
 }
 
 class PlaceOrderTodo {
-  DateTime? createdTime;
+  String? createdTime;
   String? title;
   String? id;
   String? balanceQty;

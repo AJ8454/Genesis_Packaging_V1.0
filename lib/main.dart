@@ -7,6 +7,7 @@ import 'package:sizer/sizer.dart';
 import 'initial_page.dart';
 import 'provider/employee_provider.dart';
 import 'provider/google_sign_in_provider.dart';
+import 'provider/place_neworder_provider.dart';
 import 'provider/salaryReport_sheets_api.dart';
 import 'screen/auth_screen/auth_page.dart';
 import 'screen/employee_screen/editEmployee_Screen.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => GoogleSignInProvider()),
         ChangeNotifierProvider(create: (ctx) => StockProvider()),
         ChangeNotifierProvider(create: (ctx) => EmployeeProvider()),
+        ChangeNotifierProvider(create: (ctx) => PlaceNewOrderProvider()),
       ],
       child: Sizer(
         builder: (context, orientation, deviceType) {

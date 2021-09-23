@@ -74,7 +74,6 @@ class _TodoFormWidgetState extends State<TodoFormWidget> {
         ),
       );
     }
-
     setState(() {
       _isLoading = false;
     });
@@ -82,14 +81,18 @@ class _TodoFormWidgetState extends State<TodoFormWidget> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          const SizedBox(height: 10.0),
-          buildDropdownTitle(),
-          const SizedBox(height: 8),
-          ..._getItemValue(),
-        ],
-      );
+  Widget build(BuildContext context) => _isLoading
+      ? Center(
+          child: CircularProgressIndicator(),
+        )
+      : Column(
+          children: [
+            const SizedBox(height: 10.0),
+            buildDropdownTitle(),
+            const SizedBox(height: 8),
+            ..._getItemValue(),
+          ],
+        );
 
   Widget buildDropdownTitle() => Container(
         width: 250,
@@ -140,8 +143,13 @@ class _TodoFormWidgetState extends State<TodoFormWidget> {
                 const SizedBox(height: 10.0),
                 Row(
                   children: [
-                    Text(
-                      'Supplier : ${selectedProduct![idx].supplier}',
+                    Flexible(
+                      child: Container(
+                        child: Text(
+                          'Supplier : ${selectedProduct![idx].supplier}',
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -159,6 +167,7 @@ class _TodoFormWidgetState extends State<TodoFormWidget> {
                             decoration: InputDecoration(
                               hintText: 'No. of Orders',
                             ),
+                            keyboardType: TextInputType.number,
                             onSaved: (value) {
                               _editProduct = PlaceOrderTodo(
                                 title: selectedValue,
@@ -166,7 +175,7 @@ class _TodoFormWidgetState extends State<TodoFormWidget> {
                                     selectedProduct![idx].quantity!.toString(),
                                 supplier: selectedProduct![idx].supplier!,
                                 newOrder: value,
-                                createdTime: DateTime.now(),
+                                createdTime: DateTime.now().toString(),
                                 id: selectedProduct![idx].id,
                               );
                             },
