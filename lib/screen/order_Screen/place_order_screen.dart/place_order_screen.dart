@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:genesis_packaging_v1/models/product_model.dart';
-import 'package:genesis_packaging_v1/provider/stock_provider.dart';
 import 'package:genesis_packaging_v1/widget/appbar_design.dart';
-import 'package:genesis_packaging_v1/widget/shimmer_loading_widget.dart';
-import 'package:genesis_packaging_v1/widget/stock_screen_widgets/stock_items.dart';
-import 'package:provider/provider.dart';
-import 'place_items.dart';
+import 'package:genesis_packaging_v1/widget/place_order_widgets/add_todo_dialog_widget.dart';
 
 class PlaceOrderScreen extends StatefulWidget {
   const PlaceOrderScreen({Key? key}) : super(key: key);
@@ -15,21 +10,6 @@ class PlaceOrderScreen extends StatefulWidget {
 }
 
 class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
-  List<Product>? product;
-  List<Product>? selectedProduct;
-  String? selectedValue;
-  String? itemId;
-
-  @override
-  void initState() {
-    final productData = Provider.of<StockProvider>(context, listen: false);
-    super.initState();
-    product = productData.items.toList();
-    selectedProduct = List.from(product!);
-  }
-
-  String? value;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,94 +20,96 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
         ),
         preferredSize: Size.fromHeight(100),
       ),
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              Container(
-                width: 250,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.black38, width: 2),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: ButtonTheme(
-                    alignedDropdown: true,
-                    child: DropdownButton(
-                      isExpanded: true,
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        color: Colors.black,
-                      ),
-                      hint: Text('Select Product'),
-                      items: product!.map((item) {
-                        return DropdownMenuItem(
-                          child: Text(item.title!),
-                          value: item.title,
-                        );
-                      }).toList(),
-                      onChanged: (newValue) {
-                        setState(() {
-                          selectedValue = newValue as String?;
-                        });
-                      },
-                      value: selectedValue,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Product'),
-                          Text('Bal. Qty'),
-                          Text('Orders'),
-                          Text('Supplire'),
-                        ],
-                      ),
-                      SizedBox(height: 10.0),
-                      ..._getItemValue(),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+      // body: SafeArea(
+      //   child: Center(
+      //     child: Column(
+      //       children: [
+     
+             
+      //         SingleChildScrollView(
+      //           child: Padding(
+      //             padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
+      //             child: Column(
+      //               children: [
+      //                 Row(
+      //                   children: [
+      //                     Expanded(child: Text('Product')),
+      //                     Expanded(child: Text('Bal. Qty')),
+      //                     Expanded(child: Text('Orders')),
+      //                     Expanded(child: Text('Supplire')),
+      //                   ],
+      //                 ),
+      //                 Row(
+      //                   children: [
+      //                     Expanded(
+      //                       child: Divider(),
+      //                     ),
+      //                   ],
+      //                 ),
+      //                 ..._getItemValue(),
+      //               ],
+      //             ),
+      //           ),
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => showDialog(
+          context: context,
+          builder: (_) => const AddTodoDialogWidget(),
+          barrierDismissible: false,
+        ),
+        child: Icon(
+          Icons.add,
+          size: 30.0,
+          color: Colors.white,
         ),
       ),
     );
   }
 
-  _getItemValue() {
-    return selectedProduct!.asMap().entries.map((product) {
-      int idx = product.key;
-      return selectedProduct![idx].title == selectedValue
-          ? Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  selectedProduct![idx].title!,
-                ),
-                Text(
-                  selectedProduct![idx].quantity!.toString(),
-                ),
-                Text('soon'),
-                Text(
-                  selectedProduct![idx].supplier!,
-                ),
-              ],
-            )
-          : Container();
-    }).toList();
-  }
+  // _getItemValue() {
+  //   return selectedProduct!.asMap().entries.map((product) {
+  //     int idx = product.key;
+  //     return selectedProduct![idx].title == selectedValue
+  //         ? Row(
+  //             children: [
+  //               Expanded(
+  //                 child: Text(selectedProduct![idx].title!,
+  //                     maxLines: 1, overflow: TextOverflow.ellipsis),
+  //               ),
+  //               Expanded(
+  //                 child: Text(selectedProduct![idx].quantity!.toString(),
+  //                     maxLines: 1, overflow: TextOverflow.ellipsis),
+  //               ),
+  //               Expanded(
+  //                 child: Container(
+  //                   margin: EdgeInsets.symmetric(horizontal: 3),
+  //                   padding: EdgeInsets.only(right: 8),
+  //                   decoration: BoxDecoration(
+  //                     borderRadius: BorderRadius.circular(3),
+  //                     color: Colors.white,
+  //                   ),
+  //                   child: TextField(
+  //                     maxLines: 1,
+  //                     keyboardType: TextInputType.number,
+  //                     decoration: InputDecoration(
+  //                       hintText: 'No. of Orders',
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ),
+  //               Expanded(
+  //                 child: Text(selectedProduct![idx].supplier!,
+  //                     maxLines: 1, overflow: TextOverflow.ellipsis),
+  //               ),
+  //             ],
+  //           )
+  //         : Container();
+  //   }).toList();
+  // }
 }
 
 // SingleChildScrollView(
