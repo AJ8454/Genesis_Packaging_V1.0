@@ -24,8 +24,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
       //   child: Center(
       //     child: Column(
       //       children: [
-     
-             
+
       //         SingleChildScrollView(
       //           child: Padding(
       //             padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
@@ -58,7 +57,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () => showDialog(
           context: context,
-          builder: (_) => const AddTodoDialogWidget(),
+          builder: (_) => AddTodoDialogWidget(),
           barrierDismissible: false,
         ),
         child: Icon(

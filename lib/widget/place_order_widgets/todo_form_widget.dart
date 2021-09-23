@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:genesis_packaging_v1/models/placeOrder_model.dart';
 import 'package:genesis_packaging_v1/models/product_model.dart';
+import 'package:genesis_packaging_v1/provider/place_neworder_provider.dart';
 import 'package:genesis_packaging_v1/provider/stock_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -10,9 +11,20 @@ class TodoFormWidget extends StatefulWidget {
 }
 
 class _TodoFormWidgetState extends State<TodoFormWidget> {
+  var _isLoading = false;
   List<Product>? product;
   List<Product>? selectedProduct;
   String? selectedValue;
+  final _orderController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  var _editProduct = PlaceOrderTodo(
+    id: null,
+    title: '',
+    balanceQty: '',
+    newOrder: '',
+    supplier: '',
+    createdTime: null,
+  );
 
   @override
   void initState() {
@@ -22,17 +34,61 @@ class _TodoFormWidgetState extends State<TodoFormWidget> {
     selectedProduct = product;
   }
 
-  @override
-  Widget build(BuildContext context) => SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(height: 10.0),
-            buildDropdownTitle(),
-            const SizedBox(height: 8),
-            ..._getItemValue(),
+  Future<void> _submitForm() async {
+    final isValid = _formKey.currentState!.validate();
+    if (!isValid) {
+      return;
+    }
+    _formKey.currentState!.save();
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      await Provider.of<PlaceNewOrderProvider>(context, listen: false)
+          .addPlaceOrder(_editProduct)
+          .then(
+            (_) => ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  'Place new Order',
+                  style: TextStyle(fontSize: 20),
+                ),
+                backgroundColor: Colors.green,
+              ),
+            ),
+          );
+    } catch (e) {
+      await showDialog<Null>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text('An Error occured!'),
+          content: Text('Something went wrong.'),
+          actions: [
+            TextButton(
+              child: Text('Okay', style: TextStyle(color: Colors.red)),
+              onPressed: () {
+                Navigator.of(ctx).pop();
+              },
+            )
           ],
         ),
+      );
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
+    Navigator.of(context).pop();
+  }
+
+  @override
+  Widget build(BuildContext context) => Column(
+        children: [
+          const SizedBox(height: 10.0),
+          buildDropdownTitle(),
+          const SizedBox(height: 8),
+          ..._getItemValue(),
+        ],
       );
 
   Widget buildDropdownTitle() => Container(
@@ -94,11 +150,32 @@ class _TodoFormWidgetState extends State<TodoFormWidget> {
                   children: [
                     Text('Order :'),
                     const SizedBox(width: 5.0),
-                    Container(
-                      child: Flexible(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: 'No. of Orders',
+                    Form(
+                      key: _formKey,
+                      child: Container(
+                        child: Flexible(
+                          child: TextFormField(
+                            controller: _orderController,
+                            decoration: InputDecoration(
+                              hintText: 'No. of Orders',
+                            ),
+                            onSaved: (value) {
+                              _editProduct = PlaceOrderTodo(
+                                title: selectedValue,
+                                balanceQty:
+                                    selectedProduct![idx].quantity!.toString(),
+                                supplier: selectedProduct![idx].supplier!,
+                                newOrder: value,
+                                createdTime: DateTime.now(),
+                                id: selectedProduct![idx].id,
+                              );
+                            },
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please enter the order';
+                              }
+                              return null;
+                            },
                           ),
                         ),
                       ),
@@ -116,7 +193,7 @@ class _TodoFormWidgetState extends State<TodoFormWidget> {
   Widget buildButton(context) => SizedBox(
         width: double.infinity,
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () => _submitForm(),
           child: const Text('Save'),
         ),
       );

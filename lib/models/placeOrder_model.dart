@@ -12,7 +12,7 @@ class PlaceOrderTodo {
   bool? isDone;
 
   PlaceOrderTodo({
-    required this.createdTime,
+    this.createdTime,
     required this.title,
     this.id = '',
     this.balanceQty = '',

@@ -82,7 +82,6 @@ class StockProvider with ChangeNotifier {
         rate: product.rate,
         supplier: product.supplier,
       );
-      print('added ${product.title}');
       _items.add(newProduct);
       notifyListeners();
     } catch (error) {
