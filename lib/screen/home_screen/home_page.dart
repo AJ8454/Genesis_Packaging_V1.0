@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: kCanvasColor,
+      backgroundColor: kBgColor,
       drawer: AppDrawer(),
       body: SafeArea(
         child: Padding(

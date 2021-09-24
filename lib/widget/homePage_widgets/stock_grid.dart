@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genesis_packaging_v1/provider/stock_provider.dart';
 import 'package:provider/provider.dart';
-
-import '../shimmer_loading_widget.dart';
 import 'stock_item_tile.dart';
 
 class StockGrid extends StatefulWidget {
@@ -46,18 +44,8 @@ class _StockGridState extends State<StockGrid> {
 
   @override
   Widget build(BuildContext context) {
-    return _isLoading ? buildShimmerLoading() : StockItemTile();
+    return _isLoading
+        ? Center(child: CircularProgressIndicator())
+        : StockItemTile();
   }
-
-  Widget buildShimmerLoading() => GridTile(
-        header: ShimmerWidget.circular(
-          width: 20,
-          height: 20,
-          shapeBorder: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-        footer: ShimmerWidget.rectangular(height: 16),
-        child: ShimmerWidget.rectangular(height: 14),
-      );
 }

@@ -24,7 +24,8 @@ class GoogleSignInButton extends StatelessWidget {
       onPressed: () {
         final provider =
             Provider.of<GoogleSignInProvider>(context, listen: false);
-        provider.login().then((_) => UserSimplePreferences.setUser(false));
+        provider.login();
+        UserSimplePreferences.setUser(false);
       },
       label: Text(
         'Google',

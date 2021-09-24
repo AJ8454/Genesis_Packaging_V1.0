@@ -5,18 +5,8 @@ import 'package:genesis_packaging_v1/widget/authentication_widgets/auth_password
 import 'package:genesis_packaging_v1/widget/authentication_widgets/auth_textfields.dart';
 import 'package:genesis_packaging_v1/widget/authentication_widgets/google_signIn_button.dart';
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<LoginForm> createState() => _LoginFormState();
-}
-
-class _LoginFormState extends State<LoginForm> {
+class LoginForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

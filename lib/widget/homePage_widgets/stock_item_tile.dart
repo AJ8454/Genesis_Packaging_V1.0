@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:genesis_packaging_v1/provider/stock_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
 import 'item_tile.dart';
 
 class StockItemTile extends StatelessWidget {
@@ -23,7 +22,7 @@ class StockItemTile extends StatelessWidget {
           crossAxisCount: 2,
           crossAxisSpacing: 5,
           mainAxisSpacing: 5,
-          childAspectRatio: (30.h / 52.h),
+          childAspectRatio: 3 / 4,
         ),
         itemCount: productData.items.length,
         itemBuilder: (context, i) => ChangeNotifierProvider.value(

@@ -1,18 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:genesis_packaging_v1/provider/place_neworder_provider.dart';
+import 'package:genesis_packaging_v1/utils/constants.dart';
 import 'package:genesis_packaging_v1/widget/appbar_design.dart';
 import 'package:genesis_packaging_v1/widget/place_order_widgets/add_todo_dialog_widget.dart';
+import 'package:genesis_packaging_v1/widget/place_order_widgets/todo_widget.dart';
+import 'package:genesis_packaging_v1/widget/utils.dart';
+import 'package:provider/provider.dart';
 
 class PlaceOrderScreen extends StatefulWidget {
-  const PlaceOrderScreen({Key? key}) : super(key: key);
-
   @override
   State<PlaceOrderScreen> createState() => _PlaceOrderScreenState();
 }
 
 class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
+  var _isLoading = false;
+  var _isInit = true;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _refreshPlaceOrder(context);
+  }
+
+  Future<void> _refreshPlaceOrder(context) async {
+    try {
+      if (_isInit) {
+        setState(() {
+          _isLoading = true;
+        });
+        await Provider.of<PlaceNewOrderProvider>(context, listen: false)
+            .fetchAndSetNewPlaceOrder()
+            .then((_) {
+          setState(() {
+            _isLoading = false;
+          });
+        }); // It work
+      }
+      _isInit = false;
+    } catch (error) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<PlaceNewOrderProvider>(context);
+    final placetodos = provider.items;
     return Scaffold(
+      backgroundColor: kCanvasColor,
       appBar: PreferredSize(
         child: AppBarDesign(
           text: 'Place Order',
@@ -20,40 +56,25 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
         ),
         preferredSize: Size.fromHeight(100),
       ),
-      // body: SafeArea(
-      //   child: Center(
-      //     child: Column(
-      //       children: [
-
-      //         SingleChildScrollView(
-      //           child: Padding(
-      //             padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
-      //             child: Column(
-      //               children: [
-      //                 Row(
-      //                   children: [
-      //                     Expanded(child: Text('Product')),
-      //                     Expanded(child: Text('Bal. Qty')),
-      //                     Expanded(child: Text('Orders')),
-      //                     Expanded(child: Text('Supplire')),
-      //                   ],
-      //                 ),
-      //                 Row(
-      //                   children: [
-      //                     Expanded(
-      //                       child: Divider(),
-      //                     ),
-      //                   ],
-      //                 ),
-      //                 ..._getItemValue(),
-      //               ],
-      //             ),
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
+      body: _isLoading
+          ? Center(child: CircularProgressIndicator())
+          : placetodos.isEmpty
+              ? const Center(
+                  child: Text(
+                    'No New Place Order.',
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                )
+              : ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.all(16.0),
+                  separatorBuilder: (context, index) => Container(height: 10),
+                  itemCount: placetodos.length,
+                  itemBuilder: (context, index) {
+                    final todo = placetodos[index];
+                    return PlaceTodoWidget(todo: todo);
+                  },
+                ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => showDialog(
           context: context,
@@ -68,138 +89,4 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
       ),
     );
   }
-
-  // _getItemValue() {
-  //   return selectedProduct!.asMap().entries.map((product) {
-  //     int idx = product.key;
-  //     return selectedProduct![idx].title == selectedValue
-  //         ? Row(
-  //             children: [
-  //               Expanded(
-  //                 child: Text(selectedProduct![idx].title!,
-  //                     maxLines: 1, overflow: TextOverflow.ellipsis),
-  //               ),
-  //               Expanded(
-  //                 child: Text(selectedProduct![idx].quantity!.toString(),
-  //                     maxLines: 1, overflow: TextOverflow.ellipsis),
-  //               ),
-  //               Expanded(
-  //                 child: Container(
-  //                   margin: EdgeInsets.symmetric(horizontal: 3),
-  //                   padding: EdgeInsets.only(right: 8),
-  //                   decoration: BoxDecoration(
-  //                     borderRadius: BorderRadius.circular(3),
-  //                     color: Colors.white,
-  //                   ),
-  //                   child: TextField(
-  //                     maxLines: 1,
-  //                     keyboardType: TextInputType.number,
-  //                     decoration: InputDecoration(
-  //                       hintText: 'No. of Orders',
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ),
-  //               Expanded(
-  //                 child: Text(selectedProduct![idx].supplier!,
-  //                     maxLines: 1, overflow: TextOverflow.ellipsis),
-  //               ),
-  //             ],
-  //           )
-  //         : Container();
-  //   }).toList();
-  // }
 }
-
-// SingleChildScrollView(
-//                 scrollDirection: Axis.horizontal,
-//                 child: DataTable(
-//                   columns: [
-//                     DataColumn(
-//                       label: Text('Product'),
-//                     ),
-//                     DataColumn(
-//                       label: Text('Bal. Qty'),
-//                     ),
-//                     DataColumn(
-//                       label: Text('Orders'),
-//                     ),
-//                     DataColumn(
-//                       label: Text('Supplier'),
-//                     ),
-//                   ],
-//                   rows: product!.map((itemValues) {
-//                     return DataRow(cells: [
-//                                               DataCell(
-//                           DropdownButton<Product>(
-//                             value: itemValues[selectedValue!],
-//                             onChanged: (Product? newProd) {
-//                               setState(() {
-//                                 selectedProduct![idx] = newProd!;
-//                               });
-//                             },
-//                             items: product!.map<DropdownMenuItem<Product>>(
-//                                 (Product value) {
-//                               return DropdownMenuItem<Product>(
-//                                 value: value,
-//                                 child: Text(value.title!),
-//                               );
-//                             }).toList(),
-//                           ),
-//                         ),
-//                     ]);
-//                   }).toList(),
-//                   selectedProduct!.asMap().entries.map((prod) {
-//                     int? idx = prod.key;
-//                     return DataRow(
-//                       cells: [
-//                   DataCell(
-//                     DropdownButton<Product>(
-//                       value: selectedProduct![idx],
-//                       onChanged: (Product? newProd) {
-//                         setState(() {
-//                           selectedProduct![idx] = newProd!;
-//                         });
-//                       },
-//                       items: product!.map<DropdownMenuItem<Product>>(
-//                           (Product value) {
-//                         return DropdownMenuItem<Product>(
-//                           value: value,
-//                           child: Text(value.title!),
-//                         );
-//                       }).toList(),
-//                     ),
-//                   ),
-                        // DataCell(
-                        //   Text(
-                        //     selectedProduct![idx].quantity!.toString(),
-                        //   ),
-                        // ),
-//                         DataCell(
-//                           Text('soon'),
-//                         ),
-//                         DataCell(
-//                           Text(selectedProduct![idx].supplier!),
-//                         ),
-//                         // DataCell(
-//                         //   DropdownButton<Product>(
-//                         //     value: selectedProduct![idx],
-//                         //     onChanged: (Product? newProd) {
-//                         //       setState(() {
-//                         //         selectedProduct![idx] = newProd!;
-//                         //       });
-//                         //     },
-//                         //     items: product!
-//                         //         .map<DropdownMenuItem<Product>>((Product value) {
-//                         //       return DropdownMenuItem<Product>(
-//                         //         value: value,
-//                         //         child: Text(value.quantity!.toString()),
-//                         //       );
-//                         //     }).toList(),
-//                         //   ),
-//                         // ),
-//                       ],
-//                     );
-//                   }).toList(),
-//                 ),
-//               ),

@@ -8,8 +8,46 @@ class PlaceNewOrderProvider with ChangeNotifier {
   List<PlaceOrderTodo> _items = [];
 
 // getter
-  List<PlaceOrderTodo> get items {
-    return [..._items];
+  List<PlaceOrderTodo> get items =>
+      _items.where((todo) => todo.isDone == false).toList();
+
+  List<PlaceOrderTodo> get todosCompleted =>
+      _items.where((todo) => todo.isDone == true).toList();
+
+  bool toggleTodoStatus(PlaceOrderTodo todo) {
+    todo.isDone = !todo.isDone!;
+    notifyListeners();
+    return todo.isDone!;
+  }
+
+  void removeTodo(PlaceOrderTodo todo) {
+    _items.remove(todo);
+    notifyListeners();
+  }
+
+  Future<void> fetchAndSetNewPlaceOrder() async {
+    var url =
+        'https://genesis-packaging-v-1-default-rtdb.firebaseio.com/placeOrder.json';
+    try {
+      final response = await http.get(Uri.parse(url));
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      final List<PlaceOrderTodo> loadedPlaceNewOrder = [];
+      extractedData.forEach((newOrderId, newOrderData) {
+        loadedPlaceNewOrder.add(PlaceOrderTodo(
+          id: newOrderId,
+          title: newOrderData['title'],
+          balanceQty: newOrderData['balQty'],
+          createdTime: newOrderData['createdTime'],
+          newOrder: newOrderData['newOrder'],
+          supplier: newOrderData['supplier'],
+          isDone: newOrderData['isDone'],
+        ));
+      });
+      _items = loadedPlaceNewOrder;
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
   }
 
   Future<void> addPlaceOrder(PlaceOrderTodo newPlaceOrder) async {
@@ -24,6 +62,7 @@ class PlaceNewOrderProvider with ChangeNotifier {
           'supplier': newPlaceOrder.supplier,
           'createdTime': newPlaceOrder.createdTime,
           'newOrder': newPlaceOrder.newOrder,
+          'isDone': newPlaceOrder.isDone,
         }),
       );
       final placeOrder = PlaceOrderTodo(
@@ -32,6 +71,7 @@ class PlaceNewOrderProvider with ChangeNotifier {
         balanceQty: newPlaceOrder.balanceQty,
         newOrder: newPlaceOrder.newOrder,
         createdTime: newPlaceOrder.createdTime,
+        isDone: newPlaceOrder.isDone,
       );
       _items.add(placeOrder);
       notifyListeners();

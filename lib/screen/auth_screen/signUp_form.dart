@@ -4,16 +4,7 @@ import 'package:genesis_packaging_v1/widget/authentication_widgets/auth_password
 import 'package:genesis_packaging_v1/widget/authentication_widgets/auth_textfields.dart';
 import 'package:genesis_packaging_v1/widget/authentication_widgets/google_signIn_button.dart';
 
-class SignUpForm extends StatefulWidget {
-  const SignUpForm({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<SignUpForm> createState() => _SignUpFormState();
-}
-
-class _SignUpFormState extends State<SignUpForm> {
+class SignUpForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
