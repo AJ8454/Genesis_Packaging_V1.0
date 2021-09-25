@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:genesis_packaging_v1/provider/place_neworder_provider.dart';
+import 'package:genesis_packaging_v1/provider/order_provider.dart';
 import 'package:genesis_packaging_v1/utils/constants.dart';
 import 'package:genesis_packaging_v1/widget/appbar_design.dart';
 import 'package:genesis_packaging_v1/widget/place_order_widgets/add_todo_dialog_widget.dart';
 import 'package:genesis_packaging_v1/widget/place_order_widgets/todo_widget.dart';
-import 'package:genesis_packaging_v1/widget/utils.dart';
 import 'package:provider/provider.dart';
 
 class PlaceOrderScreen extends StatefulWidget {
@@ -27,8 +26,8 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
         setState(() {
           _isLoading = true;
         });
-        await Provider.of<PlaceNewOrderProvider>(context, listen: false)
-            .fetchAndSetNewPlaceOrder()
+        await Provider.of<OrderProvider>(context, listen: false)
+            .fetchAndSetNewPlaceOrder('placeOrder')
             .then((_) {
           setState(() {
             _isLoading = false;
@@ -45,7 +44,7 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<PlaceNewOrderProvider>(context);
+    final provider = Provider.of<OrderProvider>(context);
     final placetodos = provider.items;
     return Scaffold(
       backgroundColor: kCanvasColor,

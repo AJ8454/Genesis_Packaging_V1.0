@@ -11,13 +11,13 @@ class OrderScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/PlaceOrderScreen');
-              },
+              onPressed: () =>
+                  Navigator.of(context).pushNamed('/PlaceOrderScreen'),
               child: Text('Place New Order'),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () =>
+                  Navigator.of(context).pushNamed('/CompleteTaskScreen'),
               child: Text('Completed Task'),
             ),
             ElevatedButton(

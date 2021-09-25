@@ -6,9 +6,9 @@ import 'package:genesis_packaging_v1/utils/constants.dart';
 import 'package:provider/provider.dart';
 import '../utils.dart';
 
-class PlaceTodoWidget extends StatelessWidget {
+class CompleteTaskTodoWidget extends StatelessWidget {
   final PlaceOrderTodo todo;
-  const PlaceTodoWidget({
+  const CompleteTaskTodoWidget({
     Key? key,
     required this.todo,
   }) : super(key: key);
@@ -32,7 +32,7 @@ class PlaceTodoWidget extends StatelessWidget {
         secondaryActions: [
           IconSlideAction(
             color: Colors.red,
-            onTap: () {},
+            onTap: () => deleteTodo(context, todo),
             caption: 'Delete',
             icon: Icons.delete,
           ),
@@ -46,22 +46,6 @@ class PlaceTodoWidget extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Row(
           children: [
-            Checkbox(
-              activeColor: Theme.of(context).primaryColor,
-              checkColor: Colors.white,
-              value: todo.isDone,
-              onChanged: (_) {
-                Provider.of<OrderProvider>(context, listen: false)
-                    .addPlaceOrder(todo, 'completeTask', true);
-                Provider.of<OrderProvider>(context, listen: false)
-                    .deletePlacenewOreder(todo.id!, 'placeOrder');
-                Utils.showSnackBar(
-                  context,
-                  'Order Placed',
-                );
-              },
-            ),
-            const SizedBox(width: 20),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,6 +89,12 @@ class PlaceTodoWidget extends StatelessWidget {
           ],
         ),
       );
+
+  void deleteTodo(BuildContext context, PlaceOrderTodo todo) {
+    final provider = Provider.of<OrderProvider>(context, listen: false);
+    provider.deletePlacenewOreder(todo.id!, 'completeTask');
+    Utils.showSnackBar(context, 'Deleted the task');
+  }
 
   // void stockUpdate(BuildContext context, PlaceOrderTodo todo) async {
   //   final newOrderprovider = Provider.of<StockProvider>(context, listen: false);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:genesis_packaging_v1/models/placeOrder_model.dart';
 import 'package:genesis_packaging_v1/models/product_model.dart';
-import 'package:genesis_packaging_v1/provider/place_neworder_provider.dart';
+import 'package:genesis_packaging_v1/provider/order_provider.dart';
 import 'package:genesis_packaging_v1/provider/stock_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -44,8 +44,8 @@ class _TodoFormWidgetState extends State<TodoFormWidget> {
       _isLoading = true;
     });
     try {
-      await Provider.of<PlaceNewOrderProvider>(context, listen: false)
-          .addPlaceOrder(_editProduct)
+      await Provider.of<OrderProvider>(context, listen: false)
+          .addPlaceOrder(_editProduct, 'placeOrder', false)
           .then(
             (_) => ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(

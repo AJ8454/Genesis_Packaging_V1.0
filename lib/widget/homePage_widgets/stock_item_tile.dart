@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genesis_packaging_v1/provider/stock_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 import 'item_tile.dart';
 
 class StockItemTile extends StatelessWidget {

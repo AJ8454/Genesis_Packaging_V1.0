@@ -7,7 +7,7 @@ import 'package:sizer/sizer.dart';
 import 'initial_page.dart';
 import 'provider/employee_provider.dart';
 import 'provider/google_sign_in_provider.dart';
-import 'provider/place_neworder_provider.dart';
+import 'provider/order_provider.dart';
 import 'provider/salaryReport_sheets_api.dart';
 import 'screen/auth_screen/auth_page.dart';
 import 'screen/employee_screen/editEmployee_Screen.dart';
@@ -15,8 +15,9 @@ import 'screen/employee_screen/employee_screen.dart';
 import 'screen/employee_screen/employee_users_Screen.dart';
 import 'screen/employee_screen/salaryReportScreen.dart';
 import 'screen/home_screen/product_detail_screen.dart';
+import 'screen/order_Screen/complete_task/complete_task_screen.dart';
 import 'screen/order_Screen/orders_screen.dart';
-import 'screen/order_Screen/place_order_screen.dart/place_order_screen.dart';
+import 'screen/order_Screen/place_order_screen/place_order_screen.dart';
 import 'screen/stock_items_screen/stock_edit_screen.dart';
 import 'screen/stock_items_screen/stock_items_screen.dart';
 import 'utils/constants.dart';
@@ -34,6 +35,8 @@ void main() async {
   runApp(MyApp());
 }
 
+// TODO: update balQty..
+
 class MyApp extends StatelessWidget {
   static final String title = 'Genesis Packaging';
   @override
@@ -43,7 +46,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => GoogleSignInProvider()),
         ChangeNotifierProvider(create: (ctx) => StockProvider()),
         ChangeNotifierProvider(create: (ctx) => EmployeeProvider()),
-        ChangeNotifierProvider(create: (ctx) => PlaceNewOrderProvider()),
+        ChangeNotifierProvider(create: (ctx) => OrderProvider()),
       ],
       child: Sizer(
         builder: (context, orientation, deviceType) {
@@ -64,6 +67,7 @@ class MyApp extends StatelessWidget {
               '/ProductDetailScreen': (ctx) => ProductDetailScreen(),
               '/OrderScreen': (ctx) => OrderScreen(),
               '/PlaceOrderScreen': (ctx) => PlaceOrderScreen(),
+              '/CompleteTaskScreen': (ctx) => CompleteTaskScreen(),
               '/EmployeeScreen': (ctx) => EmployeeScreen(),
               '/EmployeeUserScreen': (ctx) => EmployeeUserScreen(),
               '/EditEmployeeScreen': (ctx) => EditEmployeeScreen(),
